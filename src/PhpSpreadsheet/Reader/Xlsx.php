@@ -717,7 +717,13 @@ class Xlsx extends BaseReader implements IReader
                                     $docSheet->getSheetView()->setZoomScale((int) ($xmlSheet->sheetViews->sheetView['zoomScale']));
                                 }
                                 if (isset($xmlSheet->sheetViews->sheetView['zoomScaleNormal'])) {
-                                    $docSheet->getSheetView()->setZoomScaleNormal((int) ($xmlSheet->sheetViews->sheetView['zoomScaleNormal']));
+                                    $zoomScaleNormal = (int)$xmlSheet->sheetViews->sheetView['zoomScaleNormal'];
+                                    
+                                    if($zoomScaleNormal === 0) {
+                                      $zoomScaleNormal = 1;
+                                    }
+                                    
+                                    $docSheet->getSheetView()->setZoomScaleNormal($zoomScaleNormal);
                                 }
                                 if (isset($xmlSheet->sheetViews->sheetView['view'])) {
                                     $docSheet->getSheetView()->setView((string) $xmlSheet->sheetViews->sheetView['view']);
